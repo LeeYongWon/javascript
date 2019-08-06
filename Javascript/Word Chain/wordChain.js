@@ -1,6 +1,5 @@
 
-let word='이용원';
-let answer = prompt(word);
+
 
 // if(word[word.length-1] === answer[0]){
 //     answer=word
