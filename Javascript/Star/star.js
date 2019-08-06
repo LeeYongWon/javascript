@@ -20,3 +20,4 @@ console.log('----------------------------------------')
 for(var star= 5; star>=1; star -=2){
     console.log(' '.repeat(Math.abs(star-2))+ '*'.repeat(star));
 }
+
