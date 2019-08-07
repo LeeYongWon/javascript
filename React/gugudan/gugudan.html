@@ -40,11 +40,13 @@
             onClick=(e)=>{
                 e.preventDefault();
                 if(parseInt(this.state.value)===this.state.first*this.state.second){
-                    this.setState({
+                    this.setState((prevState)=>{
+                        return{  
                         first:Math.floor(Math.random()*9+1),
                         second:Math.floor(Math.random()*9+1),
                         value:'',
-                        result:'정답입니다'
+                        result:`${prevState.first*prevState.second} 정답입니다 `
+                        }
                     })
                 }else{
                     this.setState({
@@ -53,7 +55,6 @@
                     })
                 }
             }
-
             render(){
                 return(
                     <div>
@@ -62,7 +63,6 @@
                             <input type='number' value={this.state.value}
                             onChange={this.onChange}
                             />
-
                             <button onClick={this.onClick}>입력</button>
                         </form>
                         <h1>{this.state.result}</h1>
