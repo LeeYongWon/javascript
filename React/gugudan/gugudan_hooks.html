@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>gugudan</title>
+</head>
+<body>
+    <div id='root'></div>
+
+<script type='text/babel'>
+    /*
+        함수형 컴포넌트
+        기존에 class형 컴포넌트를 사용할 때 함수형 컴포넌트는 state값이 필요가 없는
+        컴포넌트에만 쓰였는데 hooks를 사용할 때는 함수형 컴포넌트를 사용한다.
+        react hook는 함수형 컴포넌트에서도 setState를 사용할 수 있게 하는것이다.
+        const [변수, 변수전용setState 보통set변수로 쓴다.] = React.useState(초기값);
+    */
+    const Gugudan = () =>{
+        /*
+            만약 클래스형이 였다면
+            class Gugudan extends React.Compoent{
+                state={
+                    first:Math.floor(Math.random()*9+1);
+                    second:Math.floor(Math.random()*9+1);
+                    value:'',
+                    result:''
+                }
+                render(){
+                    return(
+                        <div>this.state.first</div>
+                    );
+                }
+            } 
+        */
+       //state값 설정
+        const [first, setFirst] = React.useState(Math.floor(Math.random()*9+1));
+        const [second, setSecond] =React.useState(Math.floor(Math.random()*9+1));
+        const [value, setValue] =React.useState('');
+        const [result, setResult]=React.useState('');
+        const [count, setCount]=React.useState(0);
+
+        /*
+            ref 쓰는 방법
+            생성한 useRef함수에  useRef.current.focus();
+        */
+        const useRef = React.useRef();
+
+        const onChange = (e) =>{
+            setValue(e.target.value);
+            /*
+            class형에서는
+            this.setState({
+                value=e.target.value
+            })
+            이런식으로 해줬다
+            */
+        }
+        
+        const onClick = (e) =>{
+            e.preventDefault();
+            if(Number(value) === first * second){
+                setFirst(Math.floor(Math.random()*9+1));
+                setSecond(Math.floor(Math.random()*9+1));
+                setValue('');
+                setResult(`정답 ${value}`);
+                setCount((prevCount)=>{
+                    console.log(prevCount);
+                    return count+1;
+                });
+                useRef.current.focus();
+            }else{
+                setValue('');
+                setResult('틀렸습니다');
+                useRef.current.focus();
+            }
+        }
+        return <React.Fragment>
+                <h1>{first} 곱하기 {second} 는?</h1>
+                <h1>정답수 : {count}</h1>
+                <form>
+                    <input ref={useRef} type="number" value={value} onChange={onChange} />
+                    <button onClick={onClick}>버튼</button>
+                </form>
+                <h1>{result}</h1>
+            </React.Fragment>
+    }    
+</script>
+
+<script type='text/babel'>
+ReactDOM.render(<Gugudan />, document.getElementById('root'))
+</script>
+</body>
+</html>
