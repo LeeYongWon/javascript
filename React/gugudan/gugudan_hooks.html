@@ -7,7 +7,7 @@
     <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <title>gugudan</title>
+    <title>gugudanasdasdad</title>
 </head>
 <body>
     <div id='root'></div>
@@ -48,7 +48,7 @@
             ref 쓰는 방법
             생성한 useRef함수에  useRef.current.focus();
         */
-        const useRef = React.useRef();
+        const inputEl = React.useRef(null);
 
         const onChange = (e) =>{
             setValue(e.target.value);
@@ -72,18 +72,18 @@
                     console.log(prevCount);
                     return count+1;
                 });
-                useRef.current.focus();
+                inputEl.current.focus();
             }else{
                 setValue('');
                 setResult('틀렸습니다');
-                useRef.current.focus();
+                inputEl.current.focus();
             }
         }
         return <React.Fragment>
                 <h1>{first} 곱하기 {second} 는?</h1>
                 <h1>정답수 : {count}</h1>
                 <form>
-                    <input ref={useRef} type="number" value={value} onChange={onChange} />
+                    <input ref={inputEl} type="number" value={value} onChange={onChange} />
                     <button onClick={onClick}>버튼</button>
                 </form>
                 <h1>{result}</h1>

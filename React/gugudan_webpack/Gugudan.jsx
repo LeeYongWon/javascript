@@ -1,48 +1,39 @@
 const React = require('react');
-const ReactDom = require('react-dom');
+const { useState } = React;
 
-class Gugudan extends React.Component {
-    state = {
-        first: Math.floor(Math.random() * 9 + 1),
-        second: Math.floor(Math.random() * 9 + 1),
-        value: '',
-        result: '',
+const Gugudan = () => {
+    const [first, setFirst] = useState(Math.floor(Math.random() * 9 + 1));
+    const [second, setSecond] = useState(Math.floor(Math.random() * 9 + 1));
+    const [value, setValue] = useState('');
+    const [result, setResult] = useState('');
+    const useRef = React.useRef(null);
+    const onChange = (e) => {
+        setValue(e.target.value);
     }
-    render() {
-        return (
-            <React.Fragment>
-                <div>
-                    <h1>{this.state.first} 곱하기 {this.state.second} 는 ?</h1>
-                    <form>
-                        <input type="number" value={this.state.value} onChange={(e) => {
-                            this.setState({
-                                value: e.target.value
-                            })
-                        }} />
 
-                        <button onClick={(e) => {
-                            e.preventDefault();
-                            if (Number(this.state.value) === this.state.first * this.state.second) {
-                                this.setState({
-                                    value: '',
-                                    result: '정답입니다',
-                                    first: Math.floor(Math.random() * 9 + 1),
-                                    second: Math.floor(Math.random() * 9 + 1),
-
-                                })
-                            } else {
-                                this.setState({
-                                    value: '',
-                                    result: '틀렸습니다',
-                                })
-                            }
-                        }}>버튼</button>
-                    </form>
-                    <h1>{this.state.result}</h1>
-                </div>
-            </React.Fragment>
-        );
+    const onClick = (e) => {
+        e.preventDefault();
+        if (Number(value) === first * second) {
+            setValue('');
+            setResult('정답입니다');
+            setFirst(Math.floor(Math.random() * 9 + 1));
+            setSecond(Math.floor(Math.random() * 9 + 1));
+            useRef.current.focus();
+        } else {
+            setValue('');
+            setResult('틀렸습니다.');
+            useRef.current.focus();
+        }
     }
+    return <React.Fragment>
+        <h1>{first} 곱하기 {second} 는?</h1>
+        <form>
+            <input ref={useRef} value={value} onChange={onChange}></input>
+            <button onClick={onClick}>버튼</button>
+        </form>
+        <h1>{result}</h1>
+    </React.Fragment>
 }
+
 module.exports = Gugudan;
 
