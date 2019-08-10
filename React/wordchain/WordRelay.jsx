@@ -1,6 +1,6 @@
 const React = require('react');
 const ReactDom = require('react-dom');
-const { Component, useState, useRef } = React;
+const { Component, useState } = React;
 
 const WordRelay = () => {
     /*
@@ -12,6 +12,7 @@ const WordRelay = () => {
     const [firstWord, setFirstWord] = useState('이용원');
     const [value,setValue ] =useState('');
     const [result, setResult] = useState('');
+    const useRef = React.useRef(null);
 
     const onChange = (e) =>{
         setValue(e.target.value);
@@ -23,15 +24,17 @@ const WordRelay = () => {
             setFirstWord(value);
             setValue('');
             setResult('정답입니다');
+            useRef.current.focus();
         }else{
             setValue('');
             setResult('틀렸습니다');
+            useRef.current.focus();
         }
     }
     return <>
             <h1>제시어 : {firstWord}</h1>
         <form>
-            <input type="text" value={value} onChange={onChange}></input>
+            <input ref={useRef} type="text" value={value} onChange={onChange}></input>
             <button onClick={onClick}>버튼</button>
             <h1>{result}</h1>
         </form>
