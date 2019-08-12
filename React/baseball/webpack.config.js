@@ -11,8 +11,25 @@ module.exports ={
         app:['./client'],
     },
 
-    module:{//파일을 합칠때 어떠한 모듈을 사용할것인지
-
+    module: {//위에 entry에 있는 파일을 읽어서 거기에 module을 적용한 후 output에 빼주는 작업을 한다.
+        rules: [{//적용할 규칙
+            test: /\.jsx?/, //규칙을 적용할 파일들 정규표현식도 공부하자.
+            loader: 'babel-loader',//어떤것을 적용할것인가  js와jsx파일에 babel을 적용해서 옛날 브라우저에서도 돌아가게 해주겠다
+            options: {//여기는 적용할 babel의 옵션들을 설정해준다.
+                presets: [
+                    ['@babel/preset-env', {
+                        targets:{
+                            browsers:['> 5% in KR'], 
+                    },
+                    debug: true,
+                }],
+                    '@babel/preset-react'
+                ],
+                plugins: ['@babel/plugin-proposal-class-properties',
+                        'react-hot-loader/babel',
+            ]
+            }
+        }]
     },
 
     output:{//합쳐진 파일을 어떻게 할것인지
