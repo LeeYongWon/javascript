@@ -32,7 +32,7 @@ const WordRelay = () => {
         }
     }
     return <>
-            <h1>제시어 : {firstWord}</h1>
+            <h1>제시어 : {firstWord}  </h1>
         <form>
             <input ref={useRef} type="text" value={value} onChange={onChange}></input>
             <button onClick={onClick}>버튼</button>

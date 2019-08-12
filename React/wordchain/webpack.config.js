@@ -26,13 +26,17 @@ module.exports = {
                 }],
                     '@babel/preset-react'
                 ],
-                plugins: ['@babel/plugin-proposal-class-properties']
+                plugins: ['@babel/plugin-proposal-class-properties',
+                        'react-hot-loader/babel',
+            ]
             }
         }]
     },
     plugins:[],
     output: {
         path: path.join(__dirname, 'dist'),//dist라는 폴더에 생성될 파일을 만들어준다.
-        filename: 'App.js'//합쳐서 생성할 파일의 이름
+        filename: 'App.js',//합쳐서 생성할 파일의 이름
+        publicPath:'/dist/', //
+
     }//출력
 }
