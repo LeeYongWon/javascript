@@ -37,8 +37,17 @@ class Baseball extends Component {
                     <button>버튼</button>
                 </form>
                 <h1>시도: {this.state.tries.length}</h1>
+                <Listlist />
+            </>
+        );
+    }
+}
+class Listlist extends Component{
+    render(){
+        return(
+            <>
                 <ul>
-                    {a.map((value, i) => {
+                {a.map((value, i) => {
                         return <li key={i}>{value.fruit} - {value.taste}</li>
                     })}
                 </ul>
