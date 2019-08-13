@@ -1,15 +1,16 @@
-const path = require('path')
-module.exports ={
-    name:'baseball',//이름
-    mode:'development',//개발용인지 아닌지
-    devtool:'eval',//개발의 속도를
-    resolve:{//확장자명을 생략
-        extensions:['.jsx' ,'.js']
+const path = require('path');
+const webpack =require('webpack');
+module.exports = {
+    name: 'wordchain-settings',//그냥 이름
+    mode: 'development',//개발용인지 실서비스를 할때는 production으로 바꿔준다.
+    devtool: 'eval',//이건 그냥 빠르게 하겠다라는 뜻이다.
+    resolve: {
+        extensions: ['.jsx', '.js']//뒤에 확장자를 생략하게 해준다.
     },
 
-    entry:{//어떠한 파일을 합칠것인지
-        app:['./client'],
-    },
+    entry: {
+        app: ['./client']//어떤 파일을 합쳐서 생성할 것인가.
+    },//입력
 
     module: {//위에 entry에 있는 파일을 읽어서 거기에 module을 적용한 후 output에 빼주는 작업을 한다.
         rules: [{//적용할 규칙
@@ -31,10 +32,11 @@ module.exports ={
             }
         }]
     },
+    plugins:[],
+    output: {
+        path: path.join(__dirname, 'dist'),//dist라는 폴더에 생성될 파일을 만들어준다.
+        filename: 'App.js',//합쳐서 생성할 파일의 이름
+        publicPath:'/dist/', //
 
-    output:{//합쳐진 파일을 어떻게 할것인지
-        path:path.join(__dirname, 'dist'),
-        filename:'App.js',
-    },
-
+    }//출력
 }
