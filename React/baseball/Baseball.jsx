@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Try from './Try';
 
 const getNumbers = () => {//숫자 4개를 겹치지 않고 랜덤하게 뽑는 함수
     const a = Math.floor(Math.random() * 9 + 1)
@@ -27,6 +28,11 @@ class Baseball extends Component {
         value: '',
         answer: getNumbers(),
         tries: [],
+        a:[{ fruit: '사과', taste: '맛있디' },
+        { fruit: '바나나', taste: '맛있디' },
+        { fruit: '포도', taste: '맛있디' },
+        { fruit: '귤', taste: '맛없다' },
+        { fruit: '배', taste: '맛있디' },]
     }
     render() {
         return (
@@ -37,20 +43,7 @@ class Baseball extends Component {
                     <button>버튼</button>
                 </form>
                 <h1>시도: {this.state.tries.length}</h1>
-                <Listlist />
-            </>
-        );
-    }
-}
-class Listlist extends Component{
-    render(){
-        return(
-            <>
-                <ul>
-                {a.map((value, i) => {
-                        return <li key={i}>{value.fruit} - {value.taste}</li>
-                    })}
-                </ul>
+                <Try value={this.state.a}/>
             </>
         );
     }
